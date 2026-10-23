@@ -16,7 +16,8 @@ Um **mural de recados** completo, do banco de dados à tela: o backend em Spring
 
 1. Entre na sua conta do GitHub e clique no botão acima. Ele já abre a branch `workshop`. Pelo repositório, escolha a branch `workshop` e depois **Code → Codespaces → Create codespace on workshop**.
 2. Espere a criação terminar. Na primeira vez leva alguns minutos, porque o Codespaces já baixa todas as dependências do Maven e do npm.
-3. Quando o VS Code abrir no navegador, o ambiente está pronto: Java 21, Node e as extensões já estão instalados.
+3. Quando o VS Code abrir no navegador, ele pergunta se você confia nos autores dos arquivos ("Você confia nos autores...?" ou "Do you trust the authors...?"). Clique em **Confiar na pasta e continuar** (**Trust Folder & Continue**). Sem isso, o VS Code fica em Modo Restrito e o terminal não abre.
+4. Pronto: Java 21, Node, as dependências e as extensões já estão instalados.
 
 ## 2. Rodando
 
@@ -102,7 +103,9 @@ RecadoForm (onSubmit)
 
 ## 4. Construindo o backend
 
-Cada etapa destrava uma parte do frontend, que já está pronto. Depois de salvar, o backend reinicia sozinho. Se não reiniciar, pare com `Ctrl+C` e rode `./mvnw spring-boot:run` de novo.
+Cada etapa destrava uma parte do frontend, que já está pronto.
+
+**O backend não reinicia sozinho.** Depois de cada etapa, vá ao terminal do backend e pare com `Ctrl+C`. Espere o prompt voltar e rode `./mvnw spring-boot:run` de novo (a seta ↑ traz o comando de volta). Depois, recarregue a página do frontend.
 
 | Etapa | Arquivo | O que fazer | O que muda na tela |
 |---|---|---|---|
@@ -127,12 +130,13 @@ INSERT INTO recado (autor, texto, criado_em) VALUES
 
 A solução está na branch `main`. Para trazer **um arquivo** dela:
 ```bash
-git checkout main -- workshop-backend/src/main/java/com/comp/workshop/model/Recado.java
+git checkout origin/main -- workshop-backend/src/main/java/com/comp/workshop/model/Recado.java
 ```
 Para trazer **o backend inteiro** (isso substitui tudo o que você escreveu no backend):
 ```bash
-git checkout main -- workshop-backend
+git checkout origin/main -- workshop-backend
 ```
+Depois, reinicie o backend (`Ctrl+C` e `./mvnw spring-boot:run`).
 
 ## 5. Exercício: adicionar o campo `curso`
 
@@ -160,6 +164,8 @@ Para conferir, envie um recado sem curso: a mensagem de validação que você es
 |---|---|
 | A página mostra `No static resource api/recados.` | O endpoint ainda não existe ou o controller está sem `@RestController`/`@RequestMapping` (etapa 3). |
 | O backend não sobe: `Table "RECADO" not found` | O `data.sql` foi criado antes da entidade, ou a classe `Recado` está sem `@Entity`. |
+| Mudei o backend, mas nada mudou na tela | O backend não reinicia sozinho: `Ctrl+C` e `./mvnw spring-boot:run` de novo, depois recarregue a página. |
+| O terminal não abre e aparece "Modo Restrito" | Clique em **Modo Restrito** na barra inferior e escolha confiar na pasta. |
 | O frontend mostra "Erro 502" ou a lista não carrega | O backend não está rodando. Confira o terminal 1. |
 | `Port 5173 is already in use` | Já existe um `npm run dev` aberto em outro terminal. Feche-o com `Ctrl+C`. |
 | `Port 8080 was already in use` | Já existe um backend rodando. Feche-o com `Ctrl+C`. |
