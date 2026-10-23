@@ -10,7 +10,7 @@
     "5173": { "label": "React", "onAutoForward": "openBrowser" }
   },
   "otherPortsAttributes": { "onAutoForward": "ignore" },
-  "updateContentCommand": "cd workshop-backend && ./mvnw -B -q -DskipTests package && cd ../workshop-frontend && npm ci",
+  "updateContentCommand": "cd workshop-backend && ./mvnw -B -q package && cd ../workshop-frontend && npm ci",
   "customizations": {
     "vscode": {
       "extensions": [
