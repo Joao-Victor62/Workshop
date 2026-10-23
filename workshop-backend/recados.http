@@ -1,0 +1,23 @@
+### Listar recados
+GET http://localhost:8080/api/recados
+
+### Criar recado
+POST http://localhost:8080/api/recados
+Content-Type: application/json
+
+{
+  "autor": "Ana",
+  "texto": "Olá, COMP!"
+}
+
+### Criar recado inválido (400)
+POST http://localhost:8080/api/recados
+Content-Type: application/json
+
+{
+  "autor": "",
+  "texto": ""
+}
+
+### Excluir recado
+DELETE http://localhost:8080/api/recados/1

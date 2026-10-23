@@ -1,0 +1,24 @@
+{
+  "name": "workshop-2026.2",
+  "image": "mcr.microsoft.com/devcontainers/java:1-21",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "lts" }
+  },
+  "forwardPorts": [8080, 5173],
+  "portsAttributes": {
+    "8080": { "label": "Spring", "onAutoForward": "notify" },
+    "5173": { "label": "React", "onAutoForward": "openBrowser" }
+  },
+  "otherPortsAttributes": { "onAutoForward": "ignore" },
+  "updateContentCommand": "cd workshop-backend && ./mvnw -B -q -DskipTests package && cd ../workshop-frontend && npm ci",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "vmware.vscode-spring-boot",
+        "dbaeumer.vscode-eslint",
+        "humao.rest-client"
+      ]
+    }
+  }
+}
